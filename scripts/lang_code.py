@@ -6,6 +6,10 @@ lang_code_dict = {
         "英语": "en",
         "中文": "zh"
     },
+    "tencent": {
+        "英语": "en",
+        "中文": "zh"
+    },
     #refer: https://www.deepl.com/docs-api/translate-text/translate-text/
     "deepl": {
         "English": "EN",
