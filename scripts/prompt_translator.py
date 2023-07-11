@@ -581,6 +581,8 @@ def do_trans(provider, app_id, app_key, text, tar_lang):
         translated_text = deepl_trans(app_key, text, tar_lang_code)
     elif provider == "baidu":
         translated_text = baidu_trans(app_id, app_key, text, tar_lang_code)
+    elif provider == "tencent":
+        translated_text = tencent_trans(app_id, app_key, text, tar_lang_code)
     elif provider == "google":
         service = GoogleTranslationService(app_key)
         translated_text = service.translate(text=text, target=tar_lang_code)
