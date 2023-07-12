@@ -86,8 +86,8 @@ trans_setting = {
     },
     "tencent": {
         "is_default": True,
-        "secret_id": "",
-        "secret_key": ""
+        "app_id": "",
+        "app_key": ""
     },
     "google": {
         "is_default": False,
