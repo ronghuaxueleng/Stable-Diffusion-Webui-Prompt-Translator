@@ -1,25 +1,4 @@
 # -*- coding: UTF-8 -*-
-# This extension can translate prompt from your native language into English, so you can write prompt with your native language
-# It uses online AI based tranlation service like deepl's API. So you need to get your own API Key from those service.
-# Default translation service is Deepl, since it works better than Google and offers 500,000 free characters per month
-# For Chinese users who can not use Deepl, it offers baidu translator.
-# repo: https://github.com/butaixianran/
-#
-# How this works:
-# Translation service's API can not be used by javascript in browser. There is a famous CORS issue. 
-# So, we have to use those API at python side, then javascript can get the result. That means python extension must can be communicate with javascript side.
-# There are 2 ways for that:
-# 1. Create another http server in python, just for this extension. But that means this script never ends, and webui gonna be stopped there.
-# 2. Ask webui's team offer more extension API, so extension can get prompt before user click generate button, no need javascript anymore.
-# Maybe this can be done with some kind of hacking. And I do find a thing as:
-# txt2img_prompt = modules.ui.txt2img_paste_fields[0][0]
-# img2img_prompt = modules.ui.img2img_paste_fields[0][0]
-# in modules.ui.
-# But there is no document for that at all. And since it is a hacking, onece the ui changed, it won't work. And webui's UI changes a lot.
-# So, that leads to the third, painful way:
-# 3. Create some hidden textarea, buttons and toggles on extension's tab page. Javascript and python side both listen those components. 
-# So, they can just turn toggle on and off, to tell each other come to get data.
-# That's how this extension works now.
 import base64
 import hmac
 import time
@@ -37,12 +16,6 @@ from modules import script_callbacks
 from scripts.services import GoogleTranslationService
 import scripts.lang_code as lang_code
 from transformers import MarianMTModel, MarianTokenizer
-
-# from modules import images
-# from modules.processing import process_images, Processed
-# from modules.processing import Processed
-# from modules.shared import opts, cmd_opts, state
-
 
 # Translation Service Providers
 trans_providers = {
