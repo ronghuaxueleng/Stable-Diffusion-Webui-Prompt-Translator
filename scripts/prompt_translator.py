@@ -690,41 +690,41 @@ def on_ui_tabs():
         # ====ui====        
         # Prompt Area
         with gr.Row():
-            tar_lang_drop = gr.Dropdown(label="Target Language", choices=tar_langs, value=def_tar_lang,
+            tar_lang_drop = gr.Dropdown(label="目标语言", choices=tar_langs, value=def_tar_lang,
                                         elem_id="pt_tar_lang")
         with gr.Row():
-            prompt = gr.Textbox(label="Prompt", lines=3, value="", elem_id="pt_prompt")
-            translated_prompt = gr.Textbox(label="Translated Prompt", lines=3, value="", elem_id="pt_translated_prompt")
+            prompt = gr.Textbox(label="正向提示词", lines=3, value="", elem_id="pt_prompt")
+            translated_prompt = gr.Textbox(label="结果", lines=3, value="", elem_id="pt_translated_prompt")
 
         with gr.Row():
-            trans_prompt_btn = gr.Button(value="Translate", elem_id="pt_trans_prompt_btn")
+            trans_prompt_btn = gr.Button(value="翻译", elem_id="pt_trans_prompt_btn")
             # add a hidden button, used by fake click with javascript. To simulate msg between server and client side.
             # this is the only way.
             trans_prompt_js_btn = gr.Button(value="Trans Js", visible=False, elem_id="pt_trans_prompt_js_btn")
-            send_prompt_btn = gr.Button(value="Send to txt2img and img2img", elem_id="pt_send_prompt_btn")
+            send_prompt_btn = gr.Button(value="发送到txt2img和img2img", elem_id="pt_send_prompt_btn")
 
         with gr.Row():
-            neg_prompt = gr.Textbox(label="Negative Prompt", lines=2, value="", elem_id="pt_neg_prompt")
-            translated_neg_prompt = gr.Textbox(label="Translated Negative Prompt", lines=2, value=json.dumps(tar_langs),
+            neg_prompt = gr.Textbox(label="负向提示词", lines=2, value="", elem_id="pt_neg_prompt")
+            translated_neg_prompt = gr.Textbox(label="结果", lines=2, value=json.dumps(tar_langs),
                                                elem_id="pt_translated_neg_prompt")
 
         with gr.Row():
-            trans_neg_prompt_btn = gr.Button(value="Translate", elem_id="pt_trans_neg_prompt_btn")
+            trans_neg_prompt_btn = gr.Button(value="翻译", elem_id="pt_trans_neg_prompt_btn")
             # add a hidden button, used by fake click with javascript. To simulate msg between server and client side.
             # this is the only way.
             trans_neg_prompt_js_btn = gr.Button(value="Trans Js", visible=False, elem_id="pt_trans_neg_prompt_js_btn")
-            send_neg_prompt_btn = gr.Button(value="Send to txt2img and img2img", elem_id="pt_send_neg_prompt_btn")
+            send_neg_prompt_btn = gr.Button(value="发送到txt2img和img2img", elem_id="pt_send_neg_prompt_btn")
 
         gr.HTML("<hr />")
 
         # Translation Service Setting
 
-        gr.Markdown("Translation Service Setting")
-        provider = gr.Dropdown(choices=providers, value=provider_name, label="Provider", elem_id="pt_provider")
+        gr.Markdown("翻译服务设置")
+        provider = gr.Dropdown(choices=providers, value=provider_name, label="服务", elem_id="pt_provider")
         app_id = gr.Textbox(label="APP ID", lines=1, value=trans_setting[provider_name]["app_id"], elem_id="pt_app_id")
         app_key = gr.Textbox(label="APP KEY", lines=1, value=trans_setting[provider_name]["app_key"],
                              elem_id="pt_app_key")
-        save_trans_setting_btn = gr.Button(value="Save Setting")
+        save_trans_setting_btn = gr.Button(value="保存设置")
 
         # deepl do not need appid
         app_id.visible = trans_providers[provider_name]['has_id']
@@ -754,7 +754,7 @@ def on_ui_tabs():
         save_trans_setting_btn.click(save_trans_setting, inputs=[provider, app_id, app_key])
 
     # the third parameter is the element id on html, with a "tab_" as prefix
-    return (prompt_translator, "Prompt Translator", "prompt_translator"),
+    return (prompt_translator, "提示词翻译", "prompt_translator"),
 
 
 script_callbacks.on_ui_tabs(on_ui_tabs)
