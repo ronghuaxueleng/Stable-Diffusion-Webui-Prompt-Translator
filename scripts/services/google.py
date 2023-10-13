@@ -1,4 +1,3 @@
-
 import os
 from requests.sessions import Session
 from requests.adapters import HTTPAdapter
@@ -6,22 +5,20 @@ from .schema import GoogleTranslateInputSchema
 from .interface import TranslationService
 
 
-
-
 class GoogleTranslationService(TranslationService):
-    def __init__(self,gcp_translation_api_key:str) -> None:
+    def __init__(self, gcp_translation_api_key: str) -> None:
         self.url = "https://translation.googleapis.com"
         session = Session()
-        adapter = HTTPAdapter(max_retries=5) 
-        session.mount("https://",adapter=adapter)
+        adapter = HTTPAdapter(max_retries=5)
+        session.mount("https://", adapter=adapter)
         headers = {"X-goog-api-key": gcp_translation_api_key}
         session.headers.update(headers)
         self.session = session
 
     def translate(
-        self,
-        text: str,
-        target: str = "en",
+            self,
+            text: str,
+            target: str = "en",
     ) -> str:
         json_body = GoogleTranslateInputSchema(
             q=text,
